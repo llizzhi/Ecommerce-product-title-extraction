@@ -81,7 +81,6 @@ def pre_processing(text, mode, stopwords = [' '] + stopword_list):
     word_list = jieba.lcut_for_search(res, HMM=True)
     
     # remove punctuation
-    #res = re.sub(u'[\s+\.\!\/_,$%^*(+\"\']+|[+——！，。？、~@#￥%……&*（）|)(．ღ＊《》『』【】<>▲▶◀◎◆◤◥[]～-]+', '',text)  
     if mode == 'simplified':
         word_list = [Converter('zh-hans').convert(ele) for ele in word_list if ele not in stopwords]
     elif mode == 'traditional':
