@@ -43,7 +43,6 @@ def split_words(text, mode, stopwords = [' '] + stopword_list):
     #res = re.sub(r'\([^)]*\)', '', text)
     
     # remove punctuation
-    #res = re.sub(u'[\s+\.\!\/_,$%^*(+\"\']+|[+——！，。？、~@#￥%……&*（）|)(．ღ＊《》『』【】<>▲▶◀◎◆◤◥[]～-]+', '',text)  
     if mode == 'simplified':
         word_list = [Converter('zh-hans').convert(ele) for ele in word_list if ele not in stopwords]
     elif mode == 'traditional':
@@ -81,7 +80,6 @@ def pre_processing(text, mode, stopwords = [' '] + stopword_list):
     # split words
     word_list = jieba.lcut_for_search(res, HMM=True)
     
-    
     # remove punctuation
     #res = re.sub(u'[\s+\.\!\/_,$%^*(+\"\']+|[+——！，。？、~@#￥%……&*（）|)(．ღ＊《》『』【】<>▲▶◀◎◆◤◥[]～-]+', '',text)  
     if mode == 'simplified':
@@ -89,7 +87,6 @@ def pre_processing(text, mode, stopwords = [' '] + stopword_list):
     elif mode == 'traditional':
         word_list = [ele for ele in word_list if ele not in stopwords]
     
-        
     # remove substring
     delete_words = []
     for idx in range(len(word_list)):
@@ -98,13 +95,11 @@ def pre_processing(text, mode, stopwords = [' '] + stopword_list):
                 delete_words.append(word_list[idx]) 
     word_list = [word for word in word_list if word not in delete_words] 
     
-        
     # remove stopwords
     if len(word_list) < 1:
         word_list = text.strip()
     else:
         text = ' '.join(word_list)
-    
     
     return text
 	
@@ -156,7 +151,6 @@ def vectorizer(text, model, keys, wordvector):
     kurtosis_v = list(kurtosis(lis))
     skewness_v = list(skew(lis))
 
-    
     return np.array(min_v + mean_v + max_v + kurtosis_v + skewness_v)
 
 	
